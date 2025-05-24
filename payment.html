@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parcel Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .payment-container {
+      background: #fff;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+    .info p {
+      margin: 8px 0;
+    }
+    .pay-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pay-btn:hover {
+      background-color: #0056b3;
+    }
+    .success-message {
+      margin-top: 20px;
+      padding: 10px;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+      display: none;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 30px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .modal-content img {
+      max-width: 250px;
+      margin: 15px 0;
+    }
+    .close, .paid-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      font-size: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .close {
+      background: #ccc;
+      margin-right: 10px;
+    }
+    .paid-btn {
+      background: #28a745;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="payment-container">
+  <h2>Confirm & Pay</h2>
+
+  <div class="info">
+    <p><strong>Booking ID:</strong> B003</p>
+    <p><strong>Receiver Name:</strong> Rahul Mehta</p>
+    <p><strong>Parcel Weight:</strong> 1200g</p>
+    <p><strong>Delivery Type:</strong> Express</p>
+    <p><strong>Packing:</strong> Premium</p>
+    <p><strong>Service Cost:</strong> ₹145.00</p>
+  </div>
+
+  <button class="pay-btn" onclick="openModal()">Pay Now</button>
+
+  <div class="success-message" id="paymentSuccess">
+    ✅ Payment Successful! Thank you for booking with Taufhe.
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="qrModal" class="modal">
+  <div class="modal-content">
+    <h3>Scan to Pay</h3>
+    <img id="qrImage" src="" alt="QR Code">
+    <div>
+      <button class="close" onclick="closeModal()">Close</button>
+      <button class="paid-btn" onclick="markAsPaid()">Mark as Paid</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    // Generate random text for QR (e.g., payment ID or random token)
+    const randomText = "TAUFHE_PAYMENT_" + Math.floor(Math.random() * 1000000);
+    const qrURL = `https://api.qrserver.com/v1/create-qr-code/?data=${randomText}&size=200x200`;
+
+    document.getElementById('qrImage').src = qrURL;
+    document.getElementById('qrModal').style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById('qrModal').style.display = "none";
+  }
+
+  function markAsPaid() {
+    document.getElementById('qrModal').style.display = "none";
+    document.getElementById('paymentSuccess').style.display = "block";
+  }
+</script>
+
+</body>
+</html>

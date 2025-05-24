@@ -1,0 +1,190 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+  color: white;
+}
+
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+/* Brand name */
+.brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  user-select: none;
+}
+
+/* Navigation links container */
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+}
+
+/* Individual nav links */
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* User dropdown container */
+.user-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+/* User icon */
+.user-icon {
+  font-size: 1.9rem;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.user-dropdown:hover .user-icon {
+  color: #007bff;
+}
+
+/* Dropdown menu */
+.user-menu {
+  position: absolute;
+  right: 0;
+  top: 2.8rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 12px 0;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  display: none; /* Initially hidden, toggle with JS */
+  flex-direction: column;
+  z-index: 1100;
+}
+
+/* Show dropdown menu */
+.user-menu.show {
+  display: flex;
+}
+
+/* Dropdown links */
+.user-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.user-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 10px;
+  margin: 10px 0;
+  display: block;
+  border-radius: 8px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.widgets {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.widget {
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.widget span {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.requests-section {
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}

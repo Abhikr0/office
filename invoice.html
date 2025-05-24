@@ -1,0 +1,140 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Order confirmation</title>
+<meta name="robots" content="noindex,nofollow" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+<style type="text/css">
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+  body { margin: 0; padding: 0; background: #e1e1e1; }
+  div, p, a, li, td { -webkit-text-size-adjust: none; }
+  .ReadMsgBody, .ExternalClass { width: 100%; background-color: #ffffff; }
+  body { width: 100%; height: 100%; background-color: #e1e1e1; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  html { width: 100%; }
+  p { margin: 0 !important; padding: 0 !important; }
+  .visibleMobile { display: none; }
+  .hiddenMobile { display: block; }
+  table.fullTable {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 15px;
+  }
+  td, th {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    text-align: left;
+  }
+  .invoice-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0000;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5b5b5b;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .total-row td {
+    font-weight: bold;
+    border: none;
+  }
+  .highlight {
+    color: #ff0000;
+  }
+  @media only screen and (max-width: 600px) {
+    body { width: auto !important; }
+    table[class=fullTable] { width: 96% !important; clear: both; }
+    table[class=fullPadding] { width: 85% !important; clear: both; }
+    table[class=col] { width: 45% !important; }
+    .erase { display: none; }
+  }
+  @media only screen and (max-width: 420px) {
+    table[class=fullTable] { width: 100% !important; clear: both; }
+    table[class=fullPadding] { width: 85% !important; clear: both; }
+    table[class=col] { width: 100% !important; clear: both; }
+    table[class=col] td { text-align: left !important; }
+    .erase { display: none !important; font-size: 0 !important; max-height: 0 !important; line-height: 0 !important; padding: 0 !important; }
+    .visibleMobile { display: block !important; }
+    .hiddenMobile { display: none !important; }
+  }
+  .print-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+
+<body style="background: linear-gradient(135deg, #e1e1e1 0%, #f5f5f5 100%); padding: 20px; font-family: 'Open Sans', sans-serif;">
+  <center>
+    <table width="600" class="fullTable" cellspacing="0" cellpadding="0">
+      <tr>
+        <td colspan="2" class="invoice-title" align="center">Parcel Invoice</td>
+      </tr>
+      <tr>
+        <td><strong>Booking ID:</strong> B001</td>
+        <td align="right"><strong>Date:</strong> May 24th 2025</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="section-title">Customer Details</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <strong>Name:</strong> John Doe<br>
+          <strong>Email:</strong> john.doe@example.com<br>
+          <strong>Phone:</strong> +91-9876543210<br>
+          <strong>Address:</strong> 123 Market Street, New Delhi, 110001, India
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="section-title">Parcel Information</td>
+      </tr>
+      <tr>
+        <td>Contents</td>
+        <td align="right">Books and Documents</td>
+      </tr>
+      <tr>
+        <td>Weight</td>
+        <td align="right">1500g</td>
+      </tr>
+      <tr>
+        <td>Delivery Type</td>
+        <td align="right">Express</td>
+      </tr>
+      <tr>
+        <td>Packing Preference</td>
+        <td align="right">Premium</td>
+      </tr>
+      <tr>
+        <td>Pickup Time</td>
+        <td align="right">May 25, 2025 10:00 AM</td>
+      </tr>
+      <tr>
+        <td>Dropoff Time</td>
+        <td align="right">May 26, 2025 2:00 PM</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="section-title">Payment Details</td>
+      </tr>
+      <tr class="total-row">
+        <td>Service Cost</td>
+        <td align="right">₹175.00</td>
+      </tr>
+      <tr>
+        <td>Payment Time</td>
+        <td align="right">May 24, 2025 4:22:45 PM</td>
+      </tr>
+    </table>
+    <button class="print-button" onclick="window.print()">Print Invoice</button>
+  </center>
+</body>

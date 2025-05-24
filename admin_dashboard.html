@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Taufhe</title>
+  <link rel="stylesheet" href="admin_styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- Header / Navbar -->
+<header class="navbar">
+  <div class="brand">TOHFA</div>
+  <nav class="nav-links">
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </nav>
+  <div class="user-dropdown">
+    <i class="fas fa-user-circle user-icon"></i>
+    <div class="user-menu" style="display: none;">
+      <a href="/orders"><i class="fas fa-box"></i> Orders</a>
+      <a href="/price-chart"><i class="fas fa-chart-line"></i> Price Chart</a>
+      <a href="/track"><i class="fas fa-map-marker-alt"></i> Track</a>
+      <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+</header>
+
+<div class="dashboard-container">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Taufhe</h2>
+    <nav>
+      <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="#"><i class="fas fa-users"></i> User Requests</a>
+      <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+      <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Widgets -->
+    <div class="widgets">
+      <div class="widget glass">📦 Total Parcels<br><span>250</span></div>
+      <div class="widget glass">✅ Delivered<br><span>180</span></div>
+      <div class="widget glass">🕐 In Transit<br><span>50</span></div>
+      <div class="widget glass">🙋‍♂️ Requests<br><span>20</span></div>
+    </div>
+
+    <!-- Requests Table -->
+    <section class="requests-section glass">
+      <h2>Recent Parcel Requests</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Origin</th>
+            <th>Destination</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>1234567890</td>
+            <td>Delivered</td>
+            <td>Delhi</td>
+            <td>Mumbai</td>
+          </tr>
+          <tr>
+            <td>Jane Smith</td>
+            <td>0987654321</td>
+            <td>In Transit</td>
+            <td>Hyderabad</td>
+            <td>Bangalore</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+  // Highlight active nav link
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add('active');
+    }
+  });
+
+  // Toggle user dropdown menu
+  const userIcon = document.querySelector('.user-icon');
+  const userMenu = document.querySelector('.user-menu');
+  userIcon.addEventListener('click', () => {
+    userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Close user menu if clicked outside
+  window.addEventListener('click', (e) => {
+    if (!userIcon.contains(e.target) && !userMenu.contains(e.target)) {
+      userMenu.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
