@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sign Up Form ✨</title>
+  <title>Sign Up | Welcome! ✨</title> <!-- Updated title -->
 
   <!-- Font Awesome for icons -->
   <link
@@ -11,114 +11,355 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
   />
 
-  <link rel="stylesheet" href="register.css"/>
-
   <!-- Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
     rel="stylesheet"
   />
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: #000;
+      /* Ensure enough space for sticky nav and content */
+      /* padding-top: 80px;  Adjust if nav height changes */
+    }
+
+    nav {
+      background-color: white;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: black;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      background-color: #ff4b2b;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links li a:hover::after {
+      width: 100%;
+    }
+
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 80px - 50px); /* Full height minus nav and footer approx */
+      padding: 2rem 0; /* Add some padding for scrollable content */
+    }
+
+    .container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 768px;
+      max-width: 90%; /* Make it more responsive on smaller screens */
+      min-height: 500px; /* Can be removed if content dictates height */
+      /* display: flex; Removed as form-container will handle flex direction */
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-top: 20px; /* Space below nav */
+      margin-bottom: 20px; /* Space above footer */
+    }
+
+    .form-container {
+      width: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-container h1 {
+      margin-bottom: 1.5rem; /* Increased margin */
+      font-weight: 600;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 14px;
+      text-align: left;
+      width: 100%;
+    }
+
+    input, select {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 12px 15px;
+      margin: 8px 0 16px 0; /* Add more bottom margin */
+      width: 100%;
+      border-radius: 5px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #ff4b2b;
+      background-color: #fff;
+    }
+
+    select {
+      appearance: none; /* For custom arrow if needed, or use default */
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 1em;
+      padding-right: 2.5em; /* make room for arrow */
+    }
+
+
+    button {
+      background-color: #ff4b2b;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 45px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background-color: #ff416c;
+    }
+
+    a {
+      color: #000;
+      font-size: 13px;
+      text-decoration: none;
+      margin: 10px 0;
+    }
+
+    a:hover {
+      color: #ff4b2b;
+    }
+
+    /* No social container in sign-up, so these are optional */
+    .social-container {
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-container a {
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+    }
+
+    .social-container a:hover {
+      background-color: #eee;
+      color: #ff4b2b;
+    }
+
+    .copyright {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #888;
+      /* position: fixed; */ /* If you want it always at the bottom */
+      /* bottom: 0; */
+      /* width: 100%; */
+      background-color: #fff; /* To ensure it's not transparent over content */
+    }
+
+    /* Grid for sign-up form */
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 1rem 2rem; /* Row gap and column gap */
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .grid > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .full-width {
+        grid-column: 1 / -1; /* Span both columns */
+        text-align: center; /* Center button and link */
+    }
+
+    #signUpMessage {
+        margin-top: 10px;
+        font-size: 14px;
+        min-height: 20px; /* To prevent layout shift */
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        /* flex-direction: column;  Not needed as .form-container handles it */
+        max-width: 95%;
+      }
+
+      nav ul {
+        /* flex-direction: column; */ /* This would stack nav links, usually not desired for top nav unless hamburger menu */
+        /* align-items: flex-start; */
+      }
+      .navbar-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        flex-wrap: wrap; /* Allow nav links to wrap on small screens */
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+      }
+      .form-container {
+        padding: 1.5rem;
+      }
+      .main-content {
+        padding: 1rem 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- <header> 
-
-        <div class="navbar" id="navbar">
-            <div class="hey">Hey!</div>
-            <div class="logo" tabindex="0">
-
-                <div class="logo-top">
-
-            </div>
-            <div class="navbar-tabs" id="navbar-tabs">
-                <ul class="navbar-tabs-ul">
-                    <a href="#home" tabindex="0" aria-label="Home menu button">
-                        <li class="home activeThistab" class="navbar-tabs-li "data-aos="fade-down" data-aos-delay="100">&#60;/Home&#62;</li></a>
-                    <a href="#about"aria-label="about menu button">
-                    <li class="about" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">&#60;/AboutMe&#62;</li></a>
-                    <a href="#skills"aria-label="skills menu button">
-                    <li class="skills" class="navbar-tabs-li"data-aos="fade-down" data-aos-delay="500">&#60;/Skills&#62;</li></a>
-                    <a href="#projects"aria-label="projects menu button">
-                    <li class="projects" class="navbar-tabs-li"data-aos="fade-down" data-aos-delay="700">&#60;/Projects&#62;</li></a>
-                </ul>
-            </div><!-- navbar tabs ends -->
-        <!-- </div>
-    </header> -->
-
-
-  <div class="container">
-    <form id="signUpForm" novalidate>
-    <h1>Create an account ✨</h1>
-
-
-    <div class="grid">
-        <div>
-        <label for="name">Full Name</label>
-        <input type="text" id="name" required minlength="3" placeholder="Enter your name" />
-        </div>
-
-        <div>
-        <label for="email">Email ID</label>
-        <input type="email" id="email" required placeholder="Enter your email" />
-        </div>
-
-        <div>
-        <label for="mobile">Mobile Number</label>
-        <input type="tel" id="mobile" required pattern="[0-9]{10}" placeholder="e.g. 9876543210" />
-        </div>
-
-        <div>
-        <label for="address">Address</label>
-        <input type="text" id="address" required placeholder="Your full address" />
-        </div>
-
-        <div>
-        <label for="userId">User ID</label>
-        <input type="text" id="userId" required minlength="5" maxlength="20" placeholder="5-20 characters" />
-        </div>
-
-        <div>
-        <label for="preferences">Preferences</label>
-        <select id="preferences" required>
-            <option value="">-- Select a preference --</option>
-            <option value="Regular">Regular Parcel</option>
-            <option value="Express">Express Delivery</option>
-            <option value="Fragile">Fragile Item</option>
-            <option value="Bulk">Bulk Shipment</option>
-        </select>
-        </div>
-
-        <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" required minlength="6" placeholder="Enter password" />
-        </div>
-
-        <div>
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" required minlength="6" placeholder="Re-enter password" />
-        </div>
-
-        <div class="full-width">
-        <button type="submit">Sign Up</button>
-        <div id="signUpMessage"></div>
-        </div>
-
-        <div class="full-width">
-        <h3 class="full-width" style="text-align: center;">Already have an account ?</h3>
-        <button><a href="./home.html"></a>Login</button>
-        </div>
-
-    </div>
-    </form>
+<nav>
+  <div class="navbar-container">
+    <div class="logo">MySite</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/login.html">Login</a></li> <!-- Link to your login page -->
+      <li><a href="/about.html">About</a></li> <!-- Link to your about page -->
+    </ul>
   </div>
-<footer>
-  <!-- <div class="copyright">
-    &copy; 2025 YourCompany. All rights reserved.
-  </div> -->
-</footer>
+</nav>
+
+<div class="main-content">
+  <div class="container">
+    <div class="form-container"> <!-- Added form-container -->
+      <form id="signUpForm" novalidate>
+      <h1>Create an account ✨</h1>
+
+      <div class="grid">
+          <div>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required minlength="3" placeholder="Enter your name" />
+          </div>
+
+          <div>
+          <label for="email">Email ID</label>
+          <input type="email" id="email" required placeholder="Enter your email" />
+          </div>
+
+          <div>
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" id="mobile" required pattern="[0-9]{10}" placeholder="e.g. 9876543210" />
+          </div>
+
+          <div>
+          <label for="address">Address</label>
+          <input type="text" id="address" required placeholder="Your full address" />
+          </div>
+
+          <div>
+          <label for="userId">User ID</label>
+          <input type="text" id="userId" required minlength="5" maxlength="20" placeholder="5-20 characters" />
+          </div>
+
+          <div>
+          <label for="preferences">Preferences</label>
+          <select id="preferences" required>
+              <option value="">-- Select a preference --</option>
+              <option value="Regular">Regular Parcel</option>
+              <option value="Express">Express Delivery</option>
+              <option value="Fragile">Fragile Item</option>
+              <option value="Bulk">Bulk Shipment</option>
+          </select>
+          </div>
+
+          <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" required minlength="6" placeholder="Enter password" />
+          </div>
+
+          <div>
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" required minlength="6" placeholder="Re-enter password" />
+          </div>
+
+          <div class="full-width">
+            <button type="submit">Sign Up</button>
+            <div id="signUpMessage"></div>
+          </div>
+
+          <div class="full-width">
+            <!-- Changed this section to a simple link -->
+            <a href="/login.html">Already have an account? Login</a>
+          </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="copyright">
+  &copy; 2025 YourCompany. All rights reserved.
+</div>
+
   <script>
     document.getElementById('signUpForm').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -133,56 +374,50 @@
       const preferences = document.getElementById('preferences').value;
       const message = document.getElementById('signUpMessage');
 
-      // Validation
+      // Basic frontend validation (can be enhanced)
+      let isValid = true;
+      message.textContent = ""; // Clear previous messages
+      message.style.color = "red"; // Default to error color
+
       if (name.length < 3) {
         message.textContent = "Name must be at least 3 characters.";
-        message.style.color = "red";
-        return;
-      }
-      if (!email) {
+        isValid = false;
+      } else if (!email || !/^\S+@\S+\.\S+$/.test(email)) { // Simple email regex
         message.textContent = "Please enter a valid email.";
-        message.style.color = "red";
-        return;
-      }
-      if (!/^[0-9]{10}$/.test(mobile)) {
+        isValid = false;
+      } else if (!/^[0-9]{10}$/.test(mobile)) {
         message.textContent = "Mobile number must be 10 digits.";
-        message.style.color = "red";
-        return;
-      }
-      if (!address) {
+        isValid = false;
+      } else if (!address) {
         message.textContent = "Please enter your address.";
-        message.style.color = "red";
-        return;
-      }
-      if (userId.length < 5 || userId.length > 20) {
+        isValid = false;
+      } else if (userId.length < 5 || userId.length > 20) {
         message.textContent = "User ID must be between 5 to 20 characters.";
-        message.style.color = "red";
-        return;
-      }
-      if (password.length < 6) {
+        isValid = false;
+      } else if (password.length < 6) {
         message.textContent = "Password must be at least 6 characters.";
-        message.style.color = "red";
-        return;
-      }
-      if (password !== confirmPassword) {
+        isValid = false;
+      } else if (password !== confirmPassword) {
         message.textContent = "Passwords do not match.";
-        message.style.color = "red";
-        return;
-      }
-      if (!preferences) {
+        isValid = false;
+      } else if (!preferences) {
         message.textContent = "Please select a preference.";
-        message.style.color = "red";
-        return;
+        isValid = false;
       }
 
-      message.textContent = "Registration successful!";
+      if (!isValid) {
+          return; // Stop if validation fails
+      }
+
+      message.textContent = "Registration successful! Please wait...";
       message.style.color = "green";
 
       // Simulate backend response
       setTimeout(() => {
-        alert("User registered!");
+        alert("User registered!"); // Replace with actual backend call
         document.getElementById('signUpForm').reset();
         message.textContent = "";
+        // Optionally redirect: window.location.href = '/login.html';
       }, 1500);
     });
   </script>

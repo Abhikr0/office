@@ -4,36 +4,409 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard - Taufhe</title>
-  <link rel="stylesheet" href="admin_styles.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Basic reset & Theme Defaults from User Dashboard */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif; /* Primary font */
+    }
+
+    body {
+      background-color: #ffffff; /* White background */
+      color: #000000; /* Black text */
+      min-height: 100vh;
+    }
+
+    /* --- Top Navbar Styles (Adapted for Admin Header) --- */
+    header.navbar { /* Changed from nav.top-navbar */
+      background-color: #ffffff; /* White navbar background */
+      border-bottom: 1px solid #e0e0e0; /* Light grey border */
+      padding: 0.9rem 0;
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar-container { /* Re-using this class for structure inside header.navbar */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand { /* For "TOHFA" logo, similar to .logo */
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #000000; /* Black logo text */
+      text-decoration: none; /* Assuming it might be an anchor */
+    }
+
+    header.navbar .nav-links { /* Targeting .nav-links inside header.navbar */
+      list-style: none; /* Ensure no bullets if it were a ul */
+      display: flex;
+      gap: 2rem;
+    }
+
+    header.navbar .nav-links a {
+      text-decoration: none;
+      color: #000000; /* Black nav link text */
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 1rem;
+    }
+
+    header.navbar .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      background-color: #ff4b2b; /* Accent color for underline */
+      transition: width 0.3s ease;
+    }
+
+    header.navbar .nav-links a:hover,
+    header.navbar .nav-links a.active { /* Assuming .active class for current page */
+      color: #000000;
+    }
+    header.navbar .nav-links a:hover::after,
+    header.navbar .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .user-dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .user-icon {
+      font-size: 1.8rem; /* Match logo size feel */
+      color: #000000;
+      cursor: pointer;
+      margin-left: 1.5rem; /* Space from nav links */
+    }
+
+    .user-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px; /* Softer radius */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
+      z-index: 1001;
+      width: 200px; /* Adequate width */
+      padding: 0.5rem 0; /* Padding for items */
+      margin-top: 0.5rem; /* Space from icon */
+    }
+
+    .user-menu a {
+      display: flex; /* Use flex for icon alignment */
+      align-items: center;
+      gap: 10px; /* Space between icon and text */
+      padding: 0.75rem 1rem; /* Comfortable padding */
+      text-decoration: none;
+      color: #333333; /* Dark grey for text */
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .user-menu a i {
+      color: #555555; /* Icon color */
+      width: 16px; /* Fixed width for alignment */
+      text-align: center;
+    }
+
+    .user-menu a:hover {
+      background-color: #f0f0f0; /* Light hover */
+      color: #ff4b2b; /* Accent color on hover */
+    }
+    .user-menu a:hover i {
+        color: #ff4b2b;
+    }
+    /* --- End Top Navbar Styles --- */
+
+
+    /* --- Dashboard Layout (From User Dashboard) --- */
+    .dashboard-container {
+      display: flex;
+      width: 100%;
+      /* Calculate height based on typical navbar height, adjust if admin navbar is different */
+      /* For simplicity, assuming admin navbar height is similar to user dashboard's approx 65px */
+      height: calc(100vh - 65px); /* Adjust 65px if admin navbar height differs */
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #f8f9fa;
+      border-right: 1px solid #e0e0e0;
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .sidebar h2 { /* Sidebar Title "Taufhe" */
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #333333;
+    }
+
+    .sidebar nav a {
+      color: #333333;
+      text-decoration: none;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .sidebar nav a i {
+        color: #555555;
+        transition: color 0.3s;
+        width: 16px; /* Ensure icons align well */
+        text-align: center;
+    }
+
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      background-color: #e9ecef;
+      color: #ff4b2b;
+    }
+    .sidebar nav a.active i,
+    .sidebar nav a:hover i {
+        color: #ff4b2b;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      height: 100%;
+      background-color: #ffffff;
+    }
+
+    .main h1 { /* For "Admin Dashboard" title */
+      margin-bottom: 25px;
+      color: #222222;
+      font-size: 1.7rem; /* Same as .main h2 from user dashboard */
+      font-weight: 600;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+    }
+    /* --- End Dashboard Layout --- */
+
+
+    /* --- Content Section Styles (for Widgets and Requests Section) --- */
+    /* Applying .content-section styles to .widget and .requests-section */
+    .widget, /* Admin widget */
+    .requests-section { /* Admin requests section */
+      background-color: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .widgets {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+        gap: 25px; /* Space between widgets */
+        margin-bottom: 30px; /* Space below the widget container */
+    }
+
+    .widget {
+        padding: 20px; /* Slightly adjusted padding for widgets */
+        text-align: center; /* Center widget text */
+        font-size: 1rem;
+        color: #333;
+    }
+    .widget span {
+        display: block;
+        font-size: 2rem; /* Larger number */
+        font-weight: 600;
+        color: #000000; /* Black for the number */
+        margin-top: 8px;
+    }
+    .widget i { /* If icons are added to widgets */
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #ff4b2b; /* Accent color for icons */
+    }
+
+
+    /* --- Table Styles (for Requests Table) --- */
+    .requests-section h2 { /* For "Recent Parcel Requests" */
+        margin-bottom: 20px;
+        color: #222222;
+        font-size: 1.4rem; /* Slightly smaller than main h1 */
+        font-weight: 600;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .requests-section table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .requests-section th,
+    .requests-section td {
+        text-align: left;
+        padding: 12px 15px; /* Comfortable padding */
+        border-bottom: 1px solid #eeeeee; /* Light separator for rows */
+        font-size: 0.9rem;
+    }
+
+    .requests-section th {
+        background-color: #f8f9fa; /* Light grey header */
+        font-weight: 600;
+        color: #333333;
+    }
+
+    .requests-section tbody tr:hover {
+        background-color: #f0f0f080; /* Slight hover for rows */
+    }
+    .requests-section td {
+        color: #555555;
+    }
+    .requests-section td:first-child {
+        font-weight: 500;
+        color: #000;
+    }
+
+
+    /* --- Responsive Styles (Adapted from User Dashboard) --- */
+    @media (max-width: 992px) { /* Added a breakpoint for better widget stacking */
+        .widgets {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-container {
+        flex-direction: column;
+        align-items: center; /* Center items when stacked */
+        gap: 0.8rem;
+        padding: 0.9rem 1rem; /* Adjust padding for mobile */
+      }
+      header.navbar .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem; /* Adjust gap for wrapped links */
+        margin-top: 0.5rem; /* Space below logo */
+      }
+      .user-dropdown {
+          margin-top: 0.5rem; /* Space when navbar stacks */
+          width: 100%;
+          justify-content: center; /* Center user icon */
+      }
+      .user-icon {
+          margin-left: 0;
+      }
+      .user-menu {
+          right: auto; /* Adjust for centered icon */
+          left: 50%;
+          transform: translateX(-50%);
+      }
+
+
+      .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        /* Adjust height calc if top navbar height changes significantly on mobile */
+        height: calc(100vh - (header.navbar.offsetHeight)px); /* Dynamic adjustment idea, won't work directly in CSS */
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 15px;
+      }
+      .sidebar h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+      }
+
+      .main {
+        padding: 20px;
+      }
+      .main h1 { /* Adjust main title for mobile */
+        font-size: 1.5rem;
+      }
+      .requests-section h2 {
+        font-size: 1.2rem;
+      }
+
+      .widget, .requests-section {
+        padding: 20px;
+      }
+      .widgets {
+        grid-template-columns: 1fr; /* Stack widgets on smaller screens */
+        gap: 20px;
+      }
+       .widget span {
+        font-size: 1.8rem;
+      }
+
+      .requests-section table {
+          font-size: 0.85rem; /* Smaller font for table on mobile */
+      }
+      .requests-section th,
+      .requests-section td {
+          padding: 10px 8px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Header / Navbar -->
 <header class="navbar">
-  <div class="brand">TOHFA</div>
-  <nav class="nav-links">
-    <a href="/">Home</a>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
-  </nav>
-  <div class="user-dropdown">
-    <i class="fas fa-user-circle user-icon"></i>
-    <div class="user-menu" style="display: none;">
-      <a href="/orders"><i class="fas fa-box"></i> Orders</a>
-      <a href="/price-chart"><i class="fas fa-chart-line"></i> Price Chart</a>
-      <a href="/track"><i class="fas fa-map-marker-alt"></i> Track</a>
-      <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  <div class="navbar-container"> <a href="/" class="brand">TOHFA</a> <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    </nav>
+    <div class="user-dropdown">
+      <i class="fas fa-user-circle user-icon"></i>
+      <div class="user-menu" style="display: none;">
+        <a href="/orders"><i class="fas fa-box"></i> Orders</a>
+        <a href="/price-chart"><i class="fas fa-chart-line"></i> Price Chart</a>
+        <a href="/track"><i class="fas fa-map-marker-alt"></i> Track</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
     </div>
   </div>
 </header>
 
 <div class="dashboard-container">
 
-  <!-- Sidebar -->
   <aside class="sidebar">
-    <h2>Taufhe</h2>
-    <nav>
+    <h2>Taufhe</h2> <nav>
       <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
       <a href="#"><i class="fas fa-users"></i> User Requests</a>
       <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
@@ -41,21 +414,17 @@
     </nav>
   </aside>
 
-  <!-- Main content -->
   <main class="main">
     <h1>Admin Dashboard</h1>
 
-    <!-- Widgets -->
     <div class="widgets">
-      <div class="widget glass">📦 Total Parcels<br><span>250</span></div>
-      <div class="widget glass">✅ Delivered<br><span>180</span></div>
-      <div class="widget glass">🕐 In Transit<br><span>50</span></div>
-      <div class="widget glass">🙋‍♂️ Requests<br><span>20</span></div>
+      <div class="widget"><i class="fas fa-box"></i> Total Parcels<br><span>250</span></div>
+      <div class="widget"><i class="fas fa-check-circle"></i> Delivered<br><span>180</span></div>
+      <div class="widget"><i class="fas fa-truck-loading"></i> In Transit<br><span>50</span></div>
+      <div class="widget"><i class="fas fa-user-plus"></i> Requests<br><span>20</span></div>
     </div>
 
-    <!-- Requests Table -->
-    <section class="requests-section glass">
-      <h2>Recent Parcel Requests</h2>
+    <section class="requests-section"> <h2>Recent Parcel Requests</h2>
       <table>
         <thead>
           <tr>
@@ -81,6 +450,20 @@
             <td>Hyderabad</td>
             <td>Bangalore</td>
           </tr>
+          <tr>
+            <td>Alex Johnson</td>
+            <td>5551234567</td>
+            <td>Pending</td>
+            <td>Chennai</td>
+            <td>Kolkata</td>
+          </tr>
+           <tr>
+            <td>Maria Garcia</td>
+            <td>4449876543</td>
+            <td>Delivered</td>
+            <td>Pune</td>
+            <td>Ahmedabad</td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -90,10 +473,13 @@
 </div>
 
 <script>
-  // Highlight active nav link
-  const links = document.querySelectorAll('.nav-links a');
-  links.forEach(link => {
-    if (link.href === window.location.href) {
+  // Highlight active nav link in top navbar (example, refine as needed)
+  const topNavLinks = document.querySelectorAll('header.navbar .nav-links a');
+  const currentPath = window.location.pathname;
+
+  topNavLinks.forEach(link => {
+    // Basic matching, for more complex scenarios, consider a more robust solution
+    if (link.getAttribute('href') === currentPath || (currentPath === '/' && link.getAttribute('href') === '/')) {
       link.classList.add('active');
     }
   });
@@ -101,16 +487,31 @@
   // Toggle user dropdown menu
   const userIcon = document.querySelector('.user-icon');
   const userMenu = document.querySelector('.user-menu');
-  userIcon.addEventListener('click', () => {
-    userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+  if (userIcon && userMenu) { // Ensure elements exist
+    userIcon.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent window click event from firing immediately
+      userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close user menu if clicked outside
+    window.addEventListener('click', (e) => {
+      if (!userIcon.contains(e.target) && !userMenu.contains(e.target)) {
+        userMenu.style.display = 'none';
+      }
+    });
+  }
+
+  // Sidebar active link (can be made dynamic based on actual page navigation)
+  const sidebarLinks = document.querySelectorAll('.sidebar nav a');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // e.preventDefault(); // Prevent default if these are # links for SPA-like behavior
+      sidebarLinks.forEach(sl => sl.classList.remove('active'));
+      this.classList.add('active');
+      // Add logic here to load content if this is an SPA
+    });
   });
 
-  // Close user menu if clicked outside
-  window.addEventListener('click', (e) => {
-    if (!userIcon.contains(e.target) && !userMenu.contains(e.target)) {
-      userMenu.style.display = 'none';
-    }
-  });
 </script>
 
 </body>

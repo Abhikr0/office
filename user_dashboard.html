@@ -5,90 +5,182 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>User Dashboard - Taufhe</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    /* Basic reset */
+    /* Basic reset & Theme Defaults */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif; /* Primary font */
     }
 
     body {
-      background: url('https://cdn.pixabay.com/photo/2024/09/13/18/26/ai-generated-9045695_1280.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+      background-color: #ffffff; /* White background */
+      color: #000000; /* Black text */
       min-height: 100vh;
-      display: flex;
     }
 
+    /* --- Top Navbar Styles --- */
+    nav.top-navbar {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0.9rem 0;
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #000000;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #000000;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      background-color: #ff4b2b;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a.active-nav-link {
+      color: #000000;
+    }
+    .nav-links li a:hover::after,
+    .nav-links li a.active-nav-link::after {
+      width: 100%;
+    }
+    /* --- End Top Navbar Styles --- */
+
+    /* --- Dashboard Layout --- */
     .dashboard-container {
       display: flex;
       width: 100%;
-      height: 100vh;
-      background: rgba(0,0,0,0.6);
+      height: calc(100vh - 65px); /* Adjust 65px if navbar height differs */
     }
 
     .sidebar {
-      width: 220px;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 20px;
+      width: 240px;
+      background: #f8f9fa;
+      border-right: 1px solid #e0e0e0;
+      padding: 25px 20px;
       display: flex;
       flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
     }
 
     .sidebar h2 {
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       text-align: center;
-      font-weight: 700;
-      font-size: 1.6rem;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #333333;
     }
 
     .sidebar nav a {
-      color: white;
+      color: #333333;
       text-decoration: none;
-      padding: 12px 15px;
-      margin: 8px 0;
-      border-radius: 8px;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 6px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      transition: background 0.3s;
+      gap: 12px;
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .sidebar nav a i {
+        color: #555555;
+        transition: color 0.3s;
     }
 
     .sidebar nav a.active,
     .sidebar nav a:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background-color: #e9ecef;
+      color: #ff4b2b;
+    }
+    .sidebar nav a.active i,
+    .sidebar nav a:hover i {
+        color: #ff4b2b;
     }
 
     .main {
       flex: 1;
       padding: 30px;
       overflow-y: auto;
+      height: 100%;
+      background-color: #ffffff;
     }
 
-    h2 {
-      margin-bottom: 20px;
+    .main h2 {
+      margin-bottom: 25px;
+      color: #222222;
+      font-size: 1.7rem;
+      font-weight: 600;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
     }
+    /* --- End Dashboard Layout --- */
 
-    /* Glass effect */
-    .glass-section {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      border-radius: 15px;
-      padding: 20px;
+    /* --- Content Section Styles --- */
+    .content-section {
+      background-color: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 10px;
+      padding: 25px;
       margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
 
     .parcel-status p {
-      font-size: 1.1rem;
-      margin: 8px 0;
+      font-size: 1rem;
+      margin: 10px 0;
+      color: #333333;
+    }
+    .parcel-status p strong {
+        color: #000000;
     }
 
     .progress-container {
-      background: rgba(255, 255, 255, 0.2);
+      background: #e9ecef;
       border-radius: 20px;
-      height: 25px;
+      height: 22px;
       width: 100%;
       margin-top: 15px;
       overflow: hidden;
@@ -96,124 +188,298 @@
 
     .progress-bar {
       height: 100%;
-      background: #007bff;
+      background: #ff4b2b;
       text-align: center;
-      line-height: 25px;
-      font-weight: bold;
+      line-height: 22px;
+      font-weight: 500;
       color: white;
-      border-radius: 20px 0 0 20px;
+      border-radius: 20px;
       transition: width 0.5s ease-in-out;
     }
+    .progress-bar:not([style*="width: 100%"]) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 
-    /* Parcel list inside main for switching */
     .parcel-list {
       margin-bottom: 20px;
-      max-height: 150px;
+      max-height: 160px;
       overflow-y: auto;
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #eeeeee;
     }
 
     .parcel-list button {
       background: transparent;
       border: none;
-      color: white;
-      padding: 10px 15px;
+      color: #333333;
+      padding: 12px 15px;
       width: 100%;
       text-align: left;
       cursor: pointer;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      transition: background 0.3s;
-      font-size: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .parcel-list button:last-child {
+        border-bottom: none;
     }
 
     .parcel-list button:hover,
     .parcel-list button.active {
-      background: rgba(0,123,255,0.6);
-      color: white;
+      background-color: #ff4b2b1a;
+      color: #ff4b2b;
     }
 
-    /* Form styles */
-    .book-form label {
+    /* --- Form Styles --- */
+    .data-form label {
       display: block;
       margin: 12px 0 6px 0;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #333333;
     }
 
-    .book-form input {
+    .data-form input,
+    .data-form select,
+    .data-form textarea { /* Added textarea here */
       width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      font-size: 1rem;
+      padding: 12px 15px;
+      margin: 8px 0 16px 0;
+      border-radius: 5px;
+      border: 1px solid #dddddd;
+      background-color: #f0f0f0;
+      color: #000000;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .data-form input:focus,
+    .data-form select:focus,
+    .data-form textarea:focus { /* Added textarea here */
+      outline: 2px solid #ff4b2b;
+      border-color: #ff4b2b;
+      background-color: #ffffff;
+    }
+    .data-form input::placeholder,
+    .data-form textarea::placeholder { /* Added textarea here */
+        color: #777777;
+    }
+    .data-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 1em;
+      padding-right: 2.5em;
+    }
+     .data-form textarea { /* Specific styling for textarea if needed */
+        min-height: 80px; /* Example: minimum height */
+        resize: vertical; /* Allow vertical resizing */
     }
 
-    .book-form button {
-      margin-top: 15px;
-      padding: 12px;
+
+    .data-form button {
+      margin-top: 20px;
+      padding: 12px 45px;
       border: none;
-      border-radius: 10px;
-      background-color: #007bff;
+      border-radius: 20px;
+      background-color: #ff4b2b;
       color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
-      width: 100%;
+      transition: background-color 0.3s ease;
+      width: auto;
       font-size: 1rem;
+      display: inline-block;
+    }
+    .data-form button.full-width-btn {
+        width: 100%;
     }
 
-    .book-form button:hover {
-      background-color: #0056b3;
+    .data-form button:hover {
+      background-color: #ff416c;
+    }
+    /* --- End Form Styles --- */
+
+    /* Output div for booking form */
+    .booking-output {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+    }
+    .booking-output p {
+        margin: 5px 0;
+        font-size: 0.95rem;
+    }
+    .booking-output p strong {
+        color: #333;
+    }
+    #formMessage { /* For validation messages */
+        margin-top: 10px;
+        font-size: 0.9rem;
+        font-weight: 500;
     }
 
+
+    /* --- Responsive Styles --- */
+    @media (max-width: 768px) {
+      .navbar-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .dashboard-container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 15px;
+      }
+      .sidebar h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+      }
+
+      .main {
+        padding: 20px;
+      }
+      .main h2 {
+        font-size: 1.4rem;
+      }
+
+      .content-section {
+        padding: 20px;
+      }
+      .parcel-status p {
+        font-size: 0.9rem;
+      }
+      .data-form input, .data-form select, .data-form textarea, .data-form button {
+        font-size: 0.9rem;
+      }
+      .data-form button {
+          padding: 10px 30px;
+      }
+    }
   </style>
 </head>
 <body>
 
+<nav class="top-navbar">
+  <div class="navbar-container">
+    <div class="logo">MyDashboard</div>
+    <ul class="nav-links">
+      <li><a href="#" class="active-nav-link" id="navDashboardLink">Dashboard</a></li>
+      <li><a href="#" id="navAnalyticsLink">Analytics</a></li>
+      <li><a href="#" id="navSettingsLink">Settings</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="dashboard-container">
 
-  <!-- Sidebar -->
   <aside class="sidebar">
-    <h2>Taufhe</h2>
+    <h2>Navigation</h2>
     <nav>
-      <a href="#" class="active"><i class="fas fa-box"></i> My Parcels</a>
-      <a href="#"><i class="fas fa-plus-circle"></i> Book Parcel</a>
-      <a href="#"><i class="fas fa-user"></i> Profile</a>
-      <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      <a href="#" class="active" id="navMyParcels"><i class="fas fa-box"></i> My Parcels</a>
+      <a href="#" id="navBookParcel"><i class="fas fa-plus-circle"></i> Book Parcel</a>
+      <a href="#" id="navProfile"><i class="fas fa-user"></i> Profile</a>
+      <a href="#" id="navLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </nav>
   </aside>
 
-  <!-- Main Content -->
   <main class="main">
 
-    <section class="glass-section">
+    <section class="content-section" id="myParcelsSection">
       <h2>Parcel Status</h2>
-      
       <div class="parcel-list" id="parcelList">
-        <!-- Buttons for parcels will be inserted here -->
-      </div>
-
+        </div>
       <div class="parcel-status" id="parcelStatus">
-        <!-- Parcel details displayed here -->
-      </div>
+        </div>
     </section>
 
-    <!-- Book Parcel Form -->
-    <section class="glass-section">
+    <section class="content-section" id="bookParcelSection" style="display: none;">
       <h2>Book a Parcel</h2>
-      <form class="book-form" id="bookForm">
-        <label for="origin">Origin</label>
-        <input type="text" id="origin" placeholder="Enter origin" required />
+      <form class="data-form" id="bookForm">
+        <label for="recName">Recipient Name</label>
+        <input type="text" id="recName" placeholder="Enter recipient's full name" required>
 
-        <label for="destination">Destination</label>
-        <input type="text" id="destination" placeholder="Enter destination" required />
+        <label for="recAddress">Recipient Address</label>
+        <textarea id="recAddress" placeholder="Enter recipient's full address" required></textarea>
 
-        <label for="weight">Weight (kg)</label>
-        <input type="number" id="weight" placeholder="Enter weight" min="0.1" step="0.1" required />
+        <label for="recPin">Recipient Pin Code</label>
+        <input type="text" id="recPin" placeholder="e.g., 110001" required>
 
-        <button type="submit">Submit</button>
+        <label for="recMobile">Recipient Mobile</label>
+        <input type="tel" id="recMobile" placeholder="e.g., 9876543210" required>
+
+        <label for="parcelWeightGrams">Parcel Weight (grams)</label>
+        <input type="number" id="parcelWeightGrams" placeholder="e.g., 500" min="1" required>
+
+        <label for="contents">Parcel Contents Description</label>
+        <textarea id="contents" placeholder="Briefly describe the contents" required></textarea>
+
+        <label for="deliveryType">Delivery Type</label>
+        <select id="deliveryType" required>
+          <option value="">-- Select Delivery Type --</option>
+          <option value="standard">Standard</option>
+          <option value="express">Express</option>
+        </select>
+
+        <label for="packing">Packing Preference</label>
+        <select id="packing" required>
+          <option value="">-- Select Packing Preference --</option>
+          <option value="basic">Basic</option>
+          <option value="premium">Premium</option>
+        </select>
+
+        <label for="pickup">Pickup Time</label>
+        <input type="datetime-local" id="pickup" required>
+
+        <label for="dropoff">Preferred Dropoff Time</label>
+        <input type="datetime-local" id="dropoff" required>
+        
+        <label for="origin">Origin (City/Area)</label>
+        <input type="text" id="origin" placeholder="Enter origin of parcel" required />
+
+        <label for="destination">Destination (City/Area)</label>
+        <input type="text" id="destination" placeholder="Enter destination of parcel" required />
+
+
+        <button type="submit" class="full-width-btn">Submit Booking</button>
+
+        <div id="formMessage" style="display:none;"></div>
+
+        <div class="booking-output" id="bookingOutputDetails" style="display:none;">
+          <p><strong>Service Cost:</strong> ₹<span id="serviceCost"></span></p>
+          <p><strong>Payment Time:</strong> <span id="paymentTime"></span></p>
+        </div>
       </form>
+    </section>
+
+    <section class="content-section" id="profileSection" style="display: none;">
+        <h2>User Profile</h2>
+        <form class="data-form" id="profileForm">
+            <label for="profileName">Name</label>
+            <input type="text" id="profileName" value="Current User Name" />
+            <label for="profileEmail">Email</label>
+            <input type="email" id="profileEmail" value="user@example.com" />
+            <button type="button">Update Profile</button>
+        </form>
     </section>
 
   </main>
@@ -221,55 +487,85 @@
 
 <script>
   const parcels = [
-    {
-      id: "A12345",
-      customer: "John Doe",
-      phone: "1234567890",
-      status: "In Transit",
-      origin: "Delhi",
-      destination: "Mumbai",
-      progress: 65,
-    },
-    {
-      id: "B67890",
-      customer: "Jane Smith",
-      phone: "0987654321",
-      status: "Delivered",
-      origin: "Hyderabad",
-      destination: "Bangalore",
-      progress: 100,
-    },
-    {
-      id: "C24680",
-      customer: "Alex Johnson",
-      phone: "5551234567",
-      status: "Pending",
-      origin: "Chennai",
-      destination: "Kolkata",
-      progress: 10,
-    },
-    {
-      id: "D13579",
-      customer: "Maria Garcia",
-      phone: "4449876543",
-      status: "In Transit",
-      origin: "Pune",
-      destination: "Ahmedabad",
-      progress: 40,
-    },
+    { id: "A12345", customer: "John Doe", phone: "1234567890", status: "In Transit", origin: "Delhi", destination: "Mumbai", progress: 65, recName: "John Doe Receiver", recAddress: "123 Mumbai St", recPin: "400001", recMobileReceiver: "9988776655", parcelWeightGrams: 1200, contents: "Books and Documents", deliveryType: "express", packing: "premium", pickup: "2025-05-26T10:00", dropoff: "2025-05-28T15:00"  },
+    { id: "B67890", customer: "Jane Smith", phone: "0987654321", status: "Delivered", origin: "Hyderabad", destination: "Bangalore", progress: 100, recName: "Jane Smith Receiver", recAddress: "456 Bangalore Ave", recPin: "560001", recMobileReceiver: "9776655443", parcelWeightGrams: 800, contents: "Apparel", deliveryType: "standard", packing: "basic", pickup: "2025-05-25T14:00", dropoff: "2025-05-29T12:00" },
   ];
 
   const parcelListElem = document.getElementById('parcelList');
   const parcelStatusElem = document.getElementById('parcelStatus');
+  const bookForm = document.getElementById('bookForm'); // This is our integrated form
+
+  const myParcelsSection = document.getElementById('myParcelsSection');
+  const bookParcelSection = document.getElementById('bookParcelSection');
+  const profileSection = document.getElementById('profileSection');
+
+  const navMyParcels = document.getElementById('navMyParcels');
+  const navBookParcel = document.getElementById('navBookParcel');
+  const navProfile = document.getElementById('navProfile');
+  const navLogout = document.getElementById('navLogout');
+
+  const formMessage = document.getElementById('formMessage');
+  const bookingOutputDetails = document.getElementById('bookingOutputDetails');
+  const serviceCostElem = document.getElementById('serviceCost');
+  const paymentTimeElem = document.getElementById('paymentTime');
+
 
   let selectedParcelIndex = 0;
 
-  // Function to render parcel buttons list
+  function showSection(sectionToShow) {
+    myParcelsSection.style.display = 'none';
+    bookParcelSection.style.display = 'none';
+    profileSection.style.display = 'none';
+    if (sectionToShow) {
+        sectionToShow.style.display = 'block';
+    }
+  }
+
+  function updateSidebarActive(activeLink) {
+    document.querySelectorAll('.sidebar nav a').forEach(link => link.classList.remove('active'));
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+  }
+
+  navMyParcels.addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection(myParcelsSection);
+    updateSidebarActive(navMyParcels);
+    renderParcelList(); // Re-render list in case new parcels were added
+    if (parcels.length > 0) renderParcelStatus(); else parcelStatusElem.innerHTML = "<p>No parcels yet. Book one now!</p>";
+  });
+
+  navBookParcel.addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection(bookParcelSection);
+    updateSidebarActive(navBookParcel);
+    formMessage.style.display = 'none'; // Hide message when switching to form
+    bookingOutputDetails.style.display = 'none'; // Hide output when switching to form
+  });
+
+  navProfile.addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection(profileSection);
+    updateSidebarActive(navProfile);
+  });
+  
+  navLogout.addEventListener('click', (e) => {
+    e.preventDefault();
+    alert('Logout functionality to be implemented!');
+    // Potentially redirect to login page: window.location.href = 'login.html';
+  });
+
   function renderParcelList() {
     parcelListElem.innerHTML = '';
+    if (parcels.length === 0) {
+        parcelListElem.innerHTML = '<p>No parcels booked yet.</p>';
+        return;
+    }
     parcels.forEach((parcel, index) => {
       const btn = document.createElement('button');
-      btn.textContent = `${parcel.customer} - #${parcel.id}`;
+      // Displaying recipient name if available, otherwise customer name from parcel
+      btn.textContent = `${parcel.recName || parcel.customer} - #${parcel.id}`;
       btn.classList.toggle('active', index === selectedParcelIndex);
       btn.addEventListener('click', () => {
         selectedParcelIndex = index;
@@ -280,51 +576,218 @@
     });
   }
 
-  // Function to render selected parcel details
   function renderParcelStatus() {
+    if (parcels.length === 0 || selectedParcelIndex < 0 || selectedParcelIndex >= parcels.length) {
+        parcelStatusElem.innerHTML = "<p>No parcels to display or selection is invalid.</p>";
+        return;
+    }
     const parcel = parcels[selectedParcelIndex];
+    if (!parcel) {
+        parcelStatusElem.innerHTML = "<p>Please select a parcel.</p>";
+        return;
+    }
+    // Now includes more details if they exist on the parcel object
     parcelStatusElem.innerHTML = `
-      <p><strong>Customer:</strong> ${parcel.customer}</p>
       <p><strong>Parcel ID:</strong> #${parcel.id}</p>
       <p><strong>Status:</strong> ${parcel.status}</p>
+      <p><strong>Sender (Customer):</strong> ${parcel.customer}</p>
+      <p><strong>Sender Phone:</strong> ${parcel.phone || 'N/A'}</p>
+      <hr>
+      <p><strong>Recipient Name:</strong> ${parcel.recName || 'N/A'}</p>
+      <p><strong>Recipient Address:</strong> ${parcel.recAddress || 'N/A'}</p>
+      <p><strong>Recipient PIN:</strong> ${parcel.recPin || 'N/A'}</p>
+      <p><strong>Recipient Mobile:</strong> ${parcel.recMobileReceiver || parcel.recMobile || 'N/A'}</p>
+      <hr>
       <p><strong>Origin:</strong> ${parcel.origin}</p>
       <p><strong>Destination:</strong> ${parcel.destination}</p>
-      <p><strong>Phone:</strong> ${parcel.phone}</p>
+      <p><strong>Weight:</strong> ${parcel.parcelWeightGrams ? parcel.parcelWeightGrams + ' grams' : (parcel.weight ? parcel.weight + ' kg' : 'N/A')}</p>
+      <p><strong>Contents:</strong> ${parcel.contents || 'N/A'}</p>
+      <p><strong>Delivery Type:</strong> ${parcel.deliveryType || 'N/A'}</p>
+      <p><strong>Packing:</strong> ${parcel.packing || 'N/A'}</p>
+      <p><strong>Pickup Time:</strong> ${parcel.pickup ? new Date(parcel.pickup).toLocaleString() : 'N/A'}</p>
+      <p><strong>Dropoff Time:</strong> ${parcel.dropoff ? new Date(parcel.dropoff).toLocaleString() : 'N/A'}</p>
       <div class="progress-container">
         <div class="progress-bar" style="width: ${parcel.progress}%;">${parcel.progress}%</div>
       </div>
     `;
   }
+  
+  function calculateServiceCostAndPaymentTime(parcelDetails) {
+      // --- Placeholder: Implement your actual cost calculation logic here ---
+      // This is a very basic example.
+      let cost = 50; // Base cost
+      if (parcelDetails.deliveryType === 'express') cost += 30;
+      if (parcelDetails.packing === 'premium') cost += 20;
+      cost += (parcelDetails.parcelWeightGrams / 100) * 0.5; // Example weight factor
 
-  // Initial rendering
-  renderParcelList();
-  renderParcelStatus();
+      const paymentTime = new Date(); // Current time as payment time
+      
+      return {
+          serviceCost: cost.toFixed(2),
+          paymentTime: paymentTime.toLocaleString()
+      };
+  }
 
-  // Form submit event
-  const bookForm = document.getElementById('bookForm');
   bookForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    formMessage.style.display = 'none';
+    formMessage.textContent = '';
 
-    const newParcel = {
-      id: `N${Math.floor(Math.random() * 90000 + 10000)}`, // Random ID starting with N
-      customer: "You", // Assuming current user is "You"
-      phone: "N/A",
-      status: "Pending",
-      origin: bookForm.origin.value,
-      destination: bookForm.destination.value,
-      progress: 0,
+    // Collect all form data
+    const recName = document.getElementById('recName').value.trim();
+    const recAddress = document.getElementById('recAddress').value.trim();
+    const recPin = document.getElementById('recPin').value.trim();
+    const recMobile = document.getElementById('recMobile').value.trim(); // This is recipient's mobile
+    const parcelWeightGrams = document.getElementById('parcelWeightGrams').value;
+    const contents = document.getElementById('contents').value.trim();
+    const deliveryType = document.getElementById('deliveryType').value;
+    const packing = document.getElementById('packing').value;
+    const pickup = document.getElementById('pickup').value;
+    const dropoff = document.getElementById('dropoff').value;
+    const origin = document.getElementById('origin').value.trim(); // From original dashboard form
+    const destination = document.getElementById('destination').value.trim(); // From original dashboard form
+
+
+    // --- Basic Validation ---
+    if (recName.length < 3) {
+        formMessage.textContent = "Recipient Name must be at least 3 characters.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!recAddress) {
+        formMessage.textContent = "Please enter recipient address.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!/^[0-9]{6}$/.test(recPin)) { // Assuming 6-digit PIN
+        formMessage.textContent = "Recipient PIN must be 6 digits.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!/^[0-9]{10}$/.test(recMobile)) {
+        formMessage.textContent = "Recipient mobile number must be 10 digits.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (parseInt(parcelWeightGrams) <= 0 || !parcelWeightGrams) {
+        formMessage.textContent = "Parcel weight must be greater than 0 grams.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!contents) {
+        formMessage.textContent = "Please describe parcel contents.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!deliveryType) {
+        formMessage.textContent = "Please select a delivery type.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!packing) {
+        formMessage.textContent = "Please select a packing preference.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!pickup) {
+        formMessage.textContent = "Please select a pickup time.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+     if (!dropoff) {
+        formMessage.textContent = "Please select a dropoff time.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (new Date(dropoff) <= new Date(pickup)) {
+        formMessage.textContent = "Dropoff time must be after pickup time.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!origin) {
+        formMessage.textContent = "Please enter origin.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+    if (!destination) {
+        formMessage.textContent = "Please enter destination.";
+        formMessage.style.color = "red";
+        formMessage.style.display = 'block';
+        return;
+    }
+
+
+    const newParcelData = {
+      id: `N${Math.floor(Math.random() * 90000 + 10000)}`,
+      customer: "Current User", // Assuming a logged-in user, replace with actual user data
+      phone: "User's Phone", // Replace with actual user data
+      status: "Pending Pickup",
+      progress: 5,
+      // Fields from the integrated form:
+      recName: recName,
+      recAddress: recAddress,
+      recPin: recPin,
+      recMobile: recMobile, // Recipient's mobile
+      parcelWeightGrams: parseInt(parcelWeightGrams),
+      contents: contents,
+      deliveryType: deliveryType,
+      packing: packing,
+      pickup: pickup,
+      dropoff: dropoff,
+      origin: origin, // From original dashboard form fields
+      destination: destination // From original dashboard form fields
     };
 
-    parcels.push(newParcel);
-    selectedParcelIndex = parcels.length - 1; // Select new parcel
+    // Calculate cost and time (using the placeholder function)
+    const calculatedOutput = calculateServiceCostAndPaymentTime(newParcelData);
+    serviceCostElem.textContent = calculatedOutput.serviceCost;
+    paymentTimeElem.textContent = calculatedOutput.paymentTime;
+    bookingOutputDetails.style.display = 'block'; // Show the output
+
+    // Add to parcels array
+    parcels.push(newParcelData);
+    selectedParcelIndex = parcels.length - 1; 
+    
+    formMessage.textContent = "Parcel booking submitted successfully! Cost calculated.";
+    formMessage.style.color = "green";
+    formMessage.style.display = 'block';
+    
+    bookForm.reset(); // Reset form after successful submission
+
+    // Optionally, switch back to 'My Parcels' view after a short delay
+    setTimeout(() => {
+        showSection(myParcelsSection);
+        updateSidebarActive(navMyParcels);
+        renderParcelList(); 
+        renderParcelStatus();
+        formMessage.style.display = 'none';
+        bookingOutputDetails.style.display = 'none';
+    }, 3000); // 3 seconds delay
+  });
+
+  // Initial setup
+  showSection(myParcelsSection); 
+  updateSidebarActive(navMyParcels);
+  if (parcels.length > 0) {
     renderParcelList();
     renderParcelStatus();
+  } else {
+    parcelStatusElem.innerHTML = "<p>No parcels yet. Book one now!</p>";
+    parcelListElem.innerHTML = '<p>No parcels booked yet.</p>';
+  }
 
-    // Clear form inputs
-    bookForm.reset();
-
-    alert('Parcel booked successfully!');
-  });
 </script>
 
 </body>
